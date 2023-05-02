@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    {% set msg = get_flashed_messages(category_filter=["successMsg"]) %}
+    {% if msg %}
+        <div class="alert alert-success">
+            {% for msg in msg%}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% with errors = get_flashed_messages(category_filter=["error"]) %}
+    {% if errors %}
+        <div class="alert alert-danger">
+            {% for error in errors %}
+                {{errors}}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <div class="main-login-page">
+        <div class="container-login-page container mt-3 mb-3">
+            <form class="form-login-page" action="" method="post">
+                <h1>Login</h1>
+                <div class="form-label-page form-group">
+                    <label for="email">Usuário:</label>
+                    <input type="text" class="form-control" name="usuario" placeholder="Usuário" required>
+                </div>
+                <div class="form-label-page form-group">
+                    <label for="email">Senha:</label>
+                    <input type="password" class="form-control" name="senha" placeholder="Senha" required>
+                </div>
+                <button class="btn btn-success" type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

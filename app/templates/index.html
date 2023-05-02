@@ -1,0 +1,11 @@
+    {% extends "base.html" %}
+    {% block content %}
+    <h1>Exemplo arquivos estáticos</h1>
+        <form action="/add" method="post">
+            <input type="text" name="name" id="name" placeholder="Digite seu nome">
+            <br>
+            <button class="btn btn-success" type="submit" >Enviar</button>
+            <br><br>
+            <h1>Hello, {{name}}!</h1>
+        </form>
+    {% endblock %}
