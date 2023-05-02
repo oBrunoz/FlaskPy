@@ -1,8 +1,21 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, Flask, url_for
 from app.models import User
 from app.db.db import database as db
+from flask_bcrypt import Bcrypt
+from flask_login import login_user, LoginManager, login_required, logout_user, current_user
+from wtforms.validators import InputRequired, Length, ValidationError
 
+app = Flask(__name__)
 bpUser = Blueprint('bpUser', __name__, url_prefix='/', template_folder='../templates')
+bcrypt = Bcrypt()
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def login_user(userId):
+    return User.User.query.get(str(userId))
+
 
 @bpUser.route('/')
 def index():
@@ -23,7 +36,7 @@ def create():
             if not nome or type(nome) != str:
                 errors.append('Por favor, insira seu nome.')
 
-            if not senha or type(senha) != str or len(senha) <= 8:
+            if not senha or type(senha) != str:
                 errors.append('Por favor, insira a senha corretamente')
 
             if senha != confirmSenha:
@@ -32,14 +45,23 @@ def create():
             if len(errors) > 0:
                 return render_template('userCreate.html', errors=errors)
 
-            else:
-                user = User.User(nome, email, senha)
-                db.session.add(user)
-                db.session.commit()
-                return redirect('/cadastro')
+            if nome and email and senha and confirmSenha:
+                existing_email = User.User.query.filter_by(email=email).first()
+                existing_nome = User.User.query.filter_by(nome=nome).first()
+                if existing_email:
+                    raise ValidationError('That email already exists. Please choose a different one.')
+                if existing_nome:
+                    raise ValidationError('That name already exists. Please choose a different one.')
+                else:
+                    hashed_password = bcrypt.generate_password_hash(senha)
+                    user = User.User(nome, email, hashed_password)
+                    db.session.add(user)
+                    db.session.commit()
+                    return redirect(url_for('bpUser.login'))
             
-        except SyntaxError:
-            return 'Sla'
+            return render_template('userCreate.html')
+        except Exception as e:
+            raise e
 
 @bpUser.route('/dados')
 def recovery():
@@ -83,14 +105,18 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
     if request.method == 'POST':
-        user = request.form.get('usuario')
+        nome = request.form.get('usuario')
         senha = request.form.get('senha')
-        if user != 'admin':
-            return 'Usuário \'{}\' errado!'.format(user)
-        if senha != '123456':
-            return 'Senha \'{}\' errada!'.format(senha)
-        else:
-            return 'Parabéns!'
+
+        if nome and senha:
+            validadeUser = User.User.query.filter_by(nome=nome).first()
+            if validadeUser:
+                if bcrypt.check_password_hash(validadeUser.senha, senha):
+                    login_user(validadeUser)
+                    return 'Logado com sucesso!'
+                
+        return 'Errou alguma coisa ai filho'
+
 
 @bpUser.route('/create/adm')
 def adm():

@@ -6,6 +6,8 @@
 body {
     margin: 0;
     overflow-y: hidden;
+    background: #220135;
+    color: whitesmoke;
     font-family: 'Noto Sans', sans-serif;
 }
 
@@ -88,7 +90,6 @@ header {
     font-family: 'Poppins', sans-serif;
     font-size: 2vw;
     font-weight: 900;
-    color: whitesmoke;
 }
 
 .multiText {
@@ -183,7 +184,6 @@ header {
 }
 
 .textfield > label {
-    color: whitesmoke;
     margin-bottom: 10px;
 }
 
@@ -237,7 +237,6 @@ header {
     height: 3em;
     width: 11.5em;
     border-radius: 25px;
-    color: whitesmoke;
     line-height: 55px;
     font-size: 18px;
     letter-spacing: 3px;
@@ -319,19 +318,13 @@ button:hover .container {
     border-radius: 12px;
     padding: 15px;
     background: #6e389b;
-    color: whitesmoke;
     box-shadow: 0px 10px 40px #00000056;
     outline: none;
     box-sizing: border-box;
 }
 
 .form-label-page > label {
-    color: whitesmoke;
     margin-bottom: 10px;
-}
-
-.form-label-page > input::placeholder {
-    color: #f7fff7;
 }
 
 .form-label-page > input:focus::placeholder {
@@ -363,10 +356,6 @@ button:hover .container {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.main-contatos-page {
-    color: whitesmoke;
 }
 
 /* END CONTATO.HTML */
