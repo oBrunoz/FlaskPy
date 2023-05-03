@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, Flask, url_for
+from flask import Blueprint, render_template, request, redirect, Flask, url_for, flash
 from app.models import User
 from app.db.db import database as db
 from flask_bcrypt import Bcrypt
@@ -113,9 +113,12 @@ def login():
             if validadeUser:
                 if bcrypt.check_password_hash(validadeUser.senha, senha):
                     login_user(validadeUser)
-                    return 'Logado com sucesso!'
-                
-        return 'Errou alguma coisa ai filho'
+                    flash('Logado com sucesso major!', 'success')
+                    return render_template('login.html')
+
+        
+        flash('Ocorreu um erro ai amigao!', 'error')
+        return render_template('login.html')
 
 
 @bpUser.route('/create/adm')

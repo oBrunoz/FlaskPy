@@ -317,6 +317,7 @@ button:hover .container {
     border: none;
     border-radius: 12px;
     padding: 15px;
+    color: #18122B;
     background: #6e389b;
     box-shadow: 0px 10px 40px #00000056;
     outline: none;
@@ -329,6 +330,13 @@ button:hover .container {
 
 .form-label-page > input:focus::placeholder {
     color: transparent;
+}
+
+.alert-flash {
+    width: fit-content;
+    position: absolute;
+    top: 15%;
+
 }
 
 /* END LOGIN.HTML */
