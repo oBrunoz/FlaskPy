@@ -16,7 +16,6 @@ login_manager.login_view = 'login'
 def login_user(userId):
     return User.User.query.get(str(userId))
 
-
 @bpUser.route('/')
 def index():
     return render_template('base.html')
@@ -34,16 +33,23 @@ def create():
             errors = [];
 
             if not nome or type(nome) != str:
-                errors.append('Por favor, insira seu nome.')
+                flash('Por favor, insira seu nome.', 'error')
+                errors.append(1)
 
             if not senha or type(senha) != str:
-                errors.append('Por favor, insira a senha corretamente')
+                flash('Por favor, insira a senha corretamente', 'error')
+                errors.append(1)
+
+            if not senha == 'admin':
+                flash('Por favor, insira a senha corretamente', 'error')
+                errors.append(1)
 
             if senha != confirmSenha:
-                errors.append('Senhas incorretas!')
+                flash('Senhas incorretas!', 'error')
+                errors.append(1)
             
             if len(errors) > 0:
-                return render_template('userCreate.html', errors=errors)
+                return render_template('userCreate.html')
 
             if nome and email and senha and confirmSenha:
                 existing_email = User.User.query.filter_by(email=email).first()
@@ -113,12 +119,20 @@ def login():
             if validadeUser:
                 if bcrypt.check_password_hash(validadeUser.senha, senha):
                     login_user(validadeUser)
-                    flash('Logado com sucesso major!', 'success')
-                    return render_template('login.html')
-
+                    return redirect(url_for('bpUser.loged'))
         
-        flash('Ocorreu um erro ai amigao!', 'error')
+        flash('Não foi possível fazer login!', 'error')
         return render_template('login.html')
+    
+@bpUser.route('/dashboard', methods=['POST', 'GET'])
+@login_required
+def loged():
+    return render_template('loged.html')
+    
+@bpUser.route('/logout', methods=['POST', 'GET'])
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 
 @bpUser.route('/create/adm')
