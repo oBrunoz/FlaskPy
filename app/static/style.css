@@ -363,6 +363,14 @@ button:hover .container {
     align-items: center;
 }
 
+.form-group {
+    color: black;
+}
+
+.form-group > label {
+    color: whitesmoke;
+}
+
 /* END CADASTRO.HTML */
 
 /* CONTATO.HTML */

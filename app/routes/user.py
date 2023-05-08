@@ -1,82 +1,70 @@
-from flask import Blueprint, render_template, request, redirect, Flask, url_for, flash
-from app.models import User
+from app import app, bcrypt, login_manager
+from app.models.User import User
 from app.db.db import database as db
-from flask_bcrypt import Bcrypt
-from flask_login import login_user, LoginManager, login_required, logout_user, current_user
-from wtforms.validators import InputRequired, Length, ValidationError
-
-app = Flask(__name__)
-bpUser = Blueprint('bpUser', __name__, url_prefix='/', template_folder='../templates')
-bcrypt = Bcrypt()
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
+from flask import render_template, request, redirect, Flask, url_for, flash
+from flask_login import login_user, LoginManager, login_required, logout_user
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField
+from wtforms.validators import DataRequired, InputRequired, Length, ValidationError
 
 @login_manager.user_loader
-def login_user(userId):
-    return User.User.query.get(str(userId))
+def load_user(userId):
+    return User.query.get(int(userId))
 
-@bpUser.route('/')
+class CadastroForm(FlaskForm):
+    name = StringField('name', validators=[DataRequired()])
+    email = StringField('email', validators=[DataRequired()])
+    senha = PasswordField('senha', validators=[InputRequired(), Length(min=8, max=30)])
+    confirmSenha = PasswordField('confirmSenha', validators=[InputRequired()])
+
+    def validateEmail(self, email):
+        existing_email = User.query.filter_by(email=email.data).first()
+        if existing_email:
+            raise ValidationError('Esse email já existe!')
+        
+class LoginForm(FlaskForm):
+    name = StringField('name', validators=[DataRequired()])
+    senha = PasswordField('senha', validators=[InputRequired(), Length(min=8, max=30)])
+
+@app.route('/')
 def index():
     return render_template('base.html')
 
-@bpUser.route('/cadastro', methods=['GET', 'POST'])
-def create():
-    if request.method == 'GET':
-        return render_template('userCreate.html')
-    if request.method == 'POST':
-        try:
-            nome = request.form.get('nome')
-            email = request.form.get('email')
-            senha = request.form.get('senha')
-            confirmSenha = request.form.get('confirmSenha')
-            errors = [];
+@app.route('/cadastro', methods=['GET', 'POST'])
+def cadastro():
+    form = CadastroForm()
+    try:
+        if form.validate_on_submit():
+            if form.senha.data != form.confirmSenha.data:
+                print('Senhas erradas') 
+                #Faço alguma coisa futuramente
+            else:
+                hashed_password = bcrypt.generate_password_hash(form.senha.data)
+                newUser = User(nome=form.name.data, email=form.email.data, senha=hashed_password)
+                db.session.add(newUser)
+                db.session.commit()
+                return redirect(url_for('login'))
 
-            if not nome or type(nome) != str:
-                flash('Por favor, insira seu nome.', 'error')
-                errors.append(1)
+        return render_template('userCreate.html', form=form)
+    except Exception as err:
+        raise('Houve um erro.', err)
+    
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
 
-            if not senha or type(senha) != str:
-                flash('Por favor, insira a senha corretamente', 'error')
-                errors.append(1)
+    if form.validate_on_submit():
+        user = User.query.filter_by(nome=form.name.data).first()
+        if user:
+            if bcrypt.check_password_hash(user.senha, form.senha.data):
+                login_user(user)
+                return redirect(url_for('loged'))  
+    return render_template('login.html', form=form)
+    
 
-            if not senha == 'admin':
-                flash('Por favor, insira a senha corretamente', 'error')
-                errors.append(1)
-
-            if senha != confirmSenha:
-                flash('Senhas incorretas!', 'error')
-                errors.append(1)
-            
-            if len(errors) > 0:
-                return render_template('userCreate.html')
-
-            if nome and email and senha and confirmSenha:
-                existing_email = User.User.query.filter_by(email=email).first()
-                existing_nome = User.User.query.filter_by(nome=nome).first()
-                if existing_email:
-                    raise ValidationError('That email already exists. Please choose a different one.')
-                if existing_nome:
-                    raise ValidationError('That name already exists. Please choose a different one.')
-                else:
-                    hashed_password = bcrypt.generate_password_hash(senha)
-                    user = User.User(nome, email, hashed_password)
-                    db.session.add(user)
-                    db.session.commit()
-                    return redirect(url_for('bpUser.login'))
-            
-            return render_template('userCreate.html')
-        except Exception as e:
-            raise e
-
-@bpUser.route('/dados')
-def recovery():
-    users = User.User.query.all()
-    return render_template('userRecovery.html', users=users)
-
-@bpUser.route('/update/<int:id>', methods=['GET', 'POST'])
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
 def upt(id):
-    user = User.User.query.get(id)
+    user = User.query.get(id)
 
     if request.method == 'GET':
         return render_template('userUpdate.html', user=user)
@@ -90,9 +78,9 @@ def upt(id):
         db.session.commit()
         return redirect('/dados')
 
-@bpUser.route('/delete/<int:id>', methods=['GET', 'POST'])
+@app.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):
-    user = User.User.query.get(id)
+    user = User.query.get(id)
 
     if request.method == 'GET':
         return render_template('userDelete.html', user=user)
@@ -101,40 +89,27 @@ def delete(id):
         db.session.commit()
         return redirect('/dados')
 
-@bpUser.route('/contatos')
-def contato():
-    users = User.User.query.all()
-    return render_template('contatos.html', users=users)
-
-@bpUser.route('/login', methods=['POST', 'GET'])
-def login():
-    if request.method == 'GET':
-        return render_template('login.html')
-    if request.method == 'POST':
-        nome = request.form.get('usuario')
-        senha = request.form.get('senha')
-
-        if nome and senha:
-            validadeUser = User.User.query.filter_by(nome=nome).first()
-            if validadeUser:
-                if bcrypt.check_password_hash(validadeUser.senha, senha):
-                    login_user(validadeUser)
-                    return redirect(url_for('bpUser.loged'))
-        
-        flash('Não foi possível fazer login!', 'error')
-        return render_template('login.html')
-    
-@bpUser.route('/dashboard', methods=['POST', 'GET'])
+@app.route('/dashboard', methods=['POST', 'GET'])
 @login_required
 def loged():
     return render_template('loged.html')
-    
-@bpUser.route('/logout', methods=['POST', 'GET'])
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
+@app.route('/dados')
+def recovery():
+    users = User.query.all()
+    return render_template('userRecovery.html', users=users)
 
-@bpUser.route('/create/adm')
-def adm():
+@app.route('/contatos')
+def contato():
+    users = User.query.all()
+    return render_template('contatos.html', users=users)
+
+@app.route('/create/admin')
+def admin():
     return render_template('contatos.html')

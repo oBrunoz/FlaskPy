@@ -1,5 +1,7 @@
-    {% extends "base.html" %}
+{% extends "base.html" %}
+{% block title %}{{ super() }} - Cadastro{% endblock %}
     {% block content %}
+
 
     <div class="main-cad-page">
         {% with msg = get_flashed_messages(category_filter=["success"]) %}
@@ -23,28 +25,29 @@
         {% endfor %}
         {% endif %}
         {% endwith %}
+
         <div class="container mt-3 mb-3">
-            <form method="post">
+            <form action="" method="post">
+                {{ form.csrf_token }}
                 <h2 class="text-center mb-4">Crie sua conta</h2>
                 <div class="form-group">
                     <label for="nome">Nome:</label>
-                    <input type="text" class="form-control" name="nome" placeholder="Digite o seu nome" required>
+                    {{form.name(class_="form-control", placeholder="Digite o seu nome")}}
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" name="email" placeholder="Digite o seu email" required>
+                    {{form.email(class_="form-control", placeholder="Digite o seu email")}}
                 </div>
                 <div class="form-group">
                     <label for="senha">Senha:</label>
-                    <input type="password" class="form-control" name="senha" placeholder="Digite a sua senha"
-                        required>
+                    {{form.senha(class_="form-control", placeholder="Digite a sua senha")}}
                     <small id="passwordHelpInline" class="text-muted">
                         Mínimo de 8 caracteres.
                     </small>
                 </div>
                 <div class="form-group">
                     <label for="senha2">Repita a sua senha:</label>
-                    <input type="password" class="form-control" name="confirmSenha" placeholder="Repita sua senha" required>
+                    {{form.confirmSenha(class_="form-control", placeholder="Repita sua senha")}}
                 </div>
                 <button class="btn btn-success" type="submit" value="Cadastrar">Cadastrar</button>
             </form>
