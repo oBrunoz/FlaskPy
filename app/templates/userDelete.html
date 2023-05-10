@@ -1,4 +1,5 @@
     {% extends "base.html" %}
+    {% block title %}{{ super() }} - Deletar{% endblock %}
     {% block content %}
     <div class="container mt-3 mb-3">
       <h2 class="text-center mb-4">Você tem certeza que deseja excluir o usuário "{{user.nome}}"?</h2>

@@ -2,7 +2,7 @@ from app import app, bcrypt, login_manager
 from app.models.User import User
 from app.db.db import database as db
 from flask import render_template, request, redirect, url_for, flash
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, InputRequired, Length, ValidationError
@@ -98,31 +98,39 @@ def login():
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 @login_required
 def upt(id):
-    user = User.query.get(id)
-
-    if request.method == 'GET':
-        return render_template('userUpdate.html', user=user)
+    user = User.query.get_or_404(id)
     if request.method == 'POST':
         nome = request.form.get('nome')
         email = request.form.get('email')
-
-        user.nome = nome
-        user.email = email
-        db.session.add(user)
-        db.session.commit()
-        return redirect('/dados')
+        try:
+            user.nome = nome
+            user.email = email
+            db.session.add(user)
+            db.session.commit()
+            flash(f'ID {id} editado com sucesso!', 'success')
+            return redirect(url_for('contato'))
+        except:
+            flash('Houve um erro ao editar usuário, tente novamente.', 'error')
+            return redirect(url_for('contato'))
+    else:
+        return render_template('userUpdate.html', user=user)
 
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete(id):
-    user = User.query.get(id)
+    user = User.query.get_or_404(id)
 
     if request.method == 'GET':
         return render_template('userDelete.html', user=user)
     if request.method == 'POST':
-        db.session.delete(user)
-        db.session.commit()
-        return redirect(url_for('contato'))
+        try:
+            db.session.delete(user)
+            db.session.commit()
+            flash(f'ID {id} deletado!', 'error')
+            return redirect(url_for('contato'))
+        except:
+            flash('Houve um erro ao deletar o usuário, tente novamente.')
+            return redirect(url_for('contato'))
 
 @app.route('/dashboard', methods=['POST', 'GET'])
 @login_required
@@ -141,7 +149,3 @@ def logout():
 def contato():
     users = User.query.all()
     return render_template('contatos.html', users=users)
-
-@app.route('/create/admin')
-def admin():
-    return render_template('contatos.html')

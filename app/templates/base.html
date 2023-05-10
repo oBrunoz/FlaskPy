@@ -18,7 +18,9 @@
         <nav class="header-navigation">
             <a href="{{url_for('index')}}" style="color: #29d159; text-transform: capitalize;">Home</a>
             {% if current_user.is_authenticated %}
-                <a href="{{url_for('contato')}}">Contatos</a>
+                {% if current_user.id == 1 %}
+                    <a href="{{url_for('contato')}}">Contatos</a>
+                {% endif %}
                 <a href="{{url_for('loged')}}">Usuário</a>
                 <a href="{{url_for('logout')}}">Sair</a>
             {% else %}
