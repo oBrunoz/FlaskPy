@@ -1,4 +1,4 @@
-from app.models import db, UserMixin
+from app.models import db, UserMixin, FlaskUserMixin
 
 class User(db.Model, UserMixin):
     __tablename__ = 'usuario'

@@ -20,6 +20,7 @@
             {% if current_user.is_authenticated %}
                 {% if current_user.id == 1 %}
                     <a href="{{url_for('contato')}}">Contatos</a>
+                    <a href="/admin">Administrador</a>
                 {% endif %}
                 <a href="{{url_for('loged')}}">Usuário</a>
                 <a href="{{url_for('logout')}}">Sair</a>

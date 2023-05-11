@@ -1,7 +1,7 @@
 from app.models import db, UserMixin
 
-class Adm(db.Model, UserMixin):
-    __tablename__ = 'administrador'
+class Administrator(db.Model, UserMixin):
+    __tablename__ = 'admin'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), unique=True)
     senha = db.Column(db.String(100))
