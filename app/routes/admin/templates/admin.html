@@ -1,8 +1,58 @@
-{% extends 'base.html' %}
-{% block content %}
-{% if current_user.id == 1 %}
-    
-    <h1>Admin page</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-{% endif %}
-{% endblock  %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='adminStyle.css')}}" />
+    <title>Document</title>
+</head>
+
+<body>
+    <section>
+        {% with msg = get_flashed_messages(category_filter=["success"]) %}
+        {% if msg %}
+        {% for msg in msg %}
+        <div class="alert-flash alert alert-success alert-dismissible" role="alert">
+            {{msg}}
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span
+                    aria-hidden="true">&times;</span></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% with msg = get_flashed_messages(category_filter=["error"]) %}
+        {% if msg %}
+        {% for msg in msg%}
+        <div class="alert-flash alert alert-danger alert-dismissible" role="alert">
+            {{msg}}
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span
+                    aria-hidden="true">&times;</span></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form method="post">
+            {{form.csrf_token}}
+            <h1>Login</h1>
+            <div class="inputbox">
+                <ion-icon name="mail-outline"></ion-icon>
+                {{form.admUser(class_="form-control", placeholder="Digite seu usuário")}}
+                <label for="">Usuário</label>
+            </div>
+            <div class="inputbox">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                {{form.admSenha(class_="form-control", placeholder="Digite sua senha")}}
+                <label for="">Senha</label>
+            </div>
+            <div class="forget">
+                <label for=""><input type="checkbox">Remember Me <a href="#">Forget Password</a></label>
+            </div>
+            <button>Log in</button>
+        </form>
+    </section>
+</body>
+
+</html>
