@@ -6,49 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='adminStyle.css')}}" />
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="{{url_for('static', filename='bootstrap/js/bootstrap.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <title>Document</title>
 </head>
 
 <body>
-    <section>
-        {% with msg = get_flashed_messages(category_filter=["success"]) %}
-        {% if msg %}
-        {% for msg in msg %}
-        <div class="alert-flash alert alert-success alert-dismissible" role="alert">
-            {{msg}}
-            <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span
-                    aria-hidden="true">&times;</span></button>
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
+    {% with msg = get_flashed_messages(category_filter=["success"]) %}
+    {% if msg %}
+    {% for msg in msg %}
+    <div class="alert-flash alert alert-success alert-dismissible" role="alert">
+        {{msg}}
+        <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span
+                aria-hidden="true">&times;</span></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 
-        {% with msg = get_flashed_messages(category_filter=["error"]) %}
-        {% if msg %}
-        {% for msg in msg%}
-        <div class="alert-flash alert alert-danger alert-dismissible" role="alert">
-            {{msg}}
-            <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span
-                    aria-hidden="true">&times;</span></button>
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
+    {% with msg = get_flashed_messages(category_filter=["error"]) %}
+    {% if msg %}
+    {% for msg in msg%}
+    <div class="alert-flash alert alert-danger alert-dismissible" role="alert">
+        {{msg}}
+        <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span
+                aria-hidden="true">&times;</span></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <section>
         <form method="post">
-            {{form.csrf_token}}
+            {{form.csrf_token}} 
             <h1>Login</h1>
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                {{form.admUser(class_="form-control", placeholder="Digite seu usuário")}}
+                {{form.admUser(class_="form-control")}}
                 <label for="">Usuário</label>
             </div>
             <div class="inputbox">
                 <ion-icon name="lock-closed-outline"></ion-icon>
-                {{form.admSenha(class_="form-control", placeholder="Digite sua senha")}}
+                {{form.admSenha(class_="form-control")}}
                 <label for="">Senha</label>
-            </div>
-            <div class="forget">
-                <label for=""><input type="checkbox">Remember Me <a href="#">Forget Password</a></label>
             </div>
             <button>Log in</button>
         </form>
