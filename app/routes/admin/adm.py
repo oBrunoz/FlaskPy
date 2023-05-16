@@ -8,10 +8,6 @@ from app.routes.admin import admin_manager
 
 admin_blueprints = Blueprint('adm', __name__, template_folder='templates')
 
-@admin_manager.user_loader
-def load_admin(id):
-    return Administrator.query.get(int(id))
-
 class LoginAdminForm(FlaskForm):
     admUser = StringField('admUser', validators=[DataRequired()])
     admSenha = PasswordField('admSenha', validators=[InputRequired(), Length(min=8, max=30)])
@@ -27,23 +23,26 @@ def admin_login():
             if bcrypt.check_password_hash(admUser.senha, form.admSenha.data):
                 session['logged_in'] = True
                 flash('Conectado com sucesso!', 'success')
-                return redirect(url_for('admin_loged'))
+                return redirect('/admin')
             else:
                 flash('Usuário ou senha incorretos!', 'error')
         else:
             flash('Usuário ou senha incorretos!', 'error')
 
-    return render_template('admin.html', form=form)
+    return render_template('admin/admin.html', form=form)
 
 # CORRIGIR ERRO DE REDIRECIONAMENTO PARA ADMIN_LOGED()
 
-@admin_blueprints.route('/admin', methods=['GET', 'POST'])
-@login_required
-def admin_loged():
-    if session['logged_in'] == True:
-        return render_template('index.html')
+# @admin_blueprints.route('/admin', methods=['GET', 'POST'])
+# def admin_loged():
+#     if session['logged_in'] == True:
+#         print('correct')
+#     else:
+#         print('deu erro!')
 
-@admin_blueprints.route('/admin/logout', methods=['GET', 'POST'])
+#     return render_template('admin/index.html')
+
+@admin_blueprints.route('/admin/logout')
 def adm_logout():
     session.clear()
     flash('Admin Deslogado!', 'success')

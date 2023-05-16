@@ -13,8 +13,7 @@ from flask_admin.contrib.sqla import ModelView
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
 app.register_blueprint(admin_blueprints)
-adminPage = Admin(app, template_mode='bootstrap3')
-
+adminPage = Admin(app, template_mode='bootstrap4')
 
 from app.models.Admin import Administrator
 adminPage.add_view(SecureModelView(Administrator, database.session))
@@ -27,8 +26,6 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 Bootstrap(app)
-
-connection = 'sqlite:///meubanco.db'
 
 app.config.from_object('config')
 
