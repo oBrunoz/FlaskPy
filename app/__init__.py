@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, request, url_for
 from app.routes.admin.adm import admin_blueprints
 # from app.routes.admin import SecureModelView
 from app.db.db import database
@@ -10,8 +10,9 @@ from flask_bcrypt import Bcrypt
 from flask_admin import Admin
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
+
 app.register_blueprint(admin_blueprints)
-adminPage = Admin(app)
+adminPage = Admin(app, template_mode='bootstrap4')
 
 from app.models.Admin import Administrator
 # adminPage.add_view(SecureModelView(Administrator, database.session))
@@ -25,12 +26,13 @@ login_manager.login_view = 'login'
 
 Bootstrap(app)
 
-connection = 'sqlite:///meubanco.db'
-
 app.config.from_object('config')
 
 database.init_app(app)
 migrate = Migrate(app, database)
+
+# Admin view
+
 
 #FLASK SECURITY
 

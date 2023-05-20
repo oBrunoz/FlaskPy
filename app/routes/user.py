@@ -91,7 +91,7 @@ def login():
                 flash('Senha incorreta!', 'error')
         else:
             flash('Usuário não existe, tente novamente.', 'error')
-
+    
     return render_template('login.html', form=form)
     
 

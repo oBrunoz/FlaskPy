@@ -128,3 +128,29 @@ button {
 .register p a:hover {
     text-decoration: underline;
 }
+
+.alert-flash {
+    width: fit-content;
+    position: absolute;
+    top: 15%;
+}
+
+.alert-flash > button.close {
+    width: fit-content;
+    background: none;
+    color: whitesmoke;
+}
+
+.alert-success {
+    width: fit-content;
+    position: absolute;
+    top: 15%;
+    color: #1dab45;
+}
+
+.alert-danger {
+    width: fit-content;
+    position: absolute;
+    top: 15%;
+    color: #DC3545;
+}
