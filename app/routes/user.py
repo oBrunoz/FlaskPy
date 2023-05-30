@@ -48,7 +48,7 @@ def index():
                 login_user(user)
                 return redirect(url_for('loged'))
             else:
-                flash('Senha incorreta!', 'error')
+                flash('Usuário ou senha incorretos!', 'error')
         else:
             flash('Usuário não existe, tente novamente.', 'error')
 
@@ -88,7 +88,7 @@ def login():
                 flash('Logado!', 'success')
                 return redirect(url_for('loged'))
             else:
-                flash('Senha incorreta!', 'error')
+                flash('Usuário ou senha incorretos!', 'error')
         else:
             flash('Usuário não existe, tente novamente.', 'error')
     
