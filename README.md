@@ -56,7 +56,7 @@ Este é um projeto Flask em Python que implementa um CRUD (Create, Read, Update,
 ```
 
 
-## Feedback
+## 📢 Feedback
 
 Se você tiver algum feedback, me mande um email alencarb.dev@gmail.com.
 
