@@ -1,4 +1,6 @@
-from app.models import db, UserMixin, FlaskUserMixin
+from flask_app import app
+from flask_login import UserMixin
+from flask_app.db.db import database as db
 
 class User(db.Model, UserMixin):
     __tablename__ = 'usuario'
@@ -14,3 +16,12 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f'User: {self.nome}'
+
+# criação do banco de dados
+try:
+    with app.app_context():
+        User.query.first()
+except Exception as e:
+    print(e)
+    with app.app_context():
+       db.create_all()

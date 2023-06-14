@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='adminStyle.css')}}" />
+    <title>{% block title %}Administrador - Login{% endblock %}</title>
+</head>
+<body>
+    <div class="login-container">
+        <form action="" class="form-login" method="post">
+            {{form.csrf_token}}
+            <ul class="login-nav">
+                <li class="login-nav__item active">
+                    <a>Administrador</a>
+                </li>
+            </ul>
+            <label for="login-input-user" class="login__label">
+                Usuário
+            </label>
+            {{form.admUser(class_="login__input")}}
+            <label for="login-input-password" class="login__label">
+                Senha
+            </label>
+            {{form.admUser(class_="login__input", type="password")}}
+            <button class="login__submit" type="submit">Entrar</button>
+        </form>
+    </div>
+</body>
+</html>

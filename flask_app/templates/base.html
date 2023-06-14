@@ -14,24 +14,32 @@
     <title>{% block title %}Flask{% endblock %}</title>
 </head>
 <body>
-    <header>
-        <a href="/" class="logo"><b>Is</b>Bruno</a>
-        <nav class="header-navigation">
-            <a href="{{url_for('index')}}" style="color: #29d159; text-transform: capitalize;">Home</a>
-            {% if current_user.is_authenticated %}
-                {% if current_user.id == 1 %}
-                    <a href="{{url_for('contato')}}">Contatos</a>
-                    <a href="/admin">Administrador</a>
-                {% endif %}
-                <a href="{{url_for('loged')}}">Usuário</a>
-                <a href="{{url_for('logout')}}">Sair</a>
-            {% else %}
-                <a href="{{url_for('cadastro')}}">Cadastro</a>
-                <a href="{{url_for('login')}}">Login</a>
+    {% include 'navbar.html' %}
+    {% if get_flashed_messages() %}
+        <div class="container__alert mt-4">
+            {% with msg = get_flashed_messages(category_filter=["success"]) %}
+            {% if msg %}
+            {% for msg in msg %}
+            <div class="alert-flash alert alert-success alert-dismissible" role="alert">
+                {{msg}}
+                <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            {% endfor %}
             {% endif %}
-        </nav>
-    </header>
-
+            {% endwith %}
+        
+            {% with msg = get_flashed_messages(category_filter=["error"]) %}
+            {% if msg %}
+            {% for msg in msg%}
+            <div class="alert-flash alert alert-danger alert-dismissible" role="alert">
+                {{msg}}
+                <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+    {% endif %}
     {% block content %}
     <div class="main">
         <div class="left-main">

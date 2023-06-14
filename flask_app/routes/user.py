@@ -1,6 +1,6 @@
-from app import app, bcrypt, login_manager
-from app.models.User import User
-from app.db.db import database as db
+from flask_app import app, bcrypt, login_manager
+from flask_app.models.User import User
+from flask_app.db.db import database as db
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -74,7 +74,9 @@ def cadastro():
 
         return render_template('userCreate.html', form=form)
     except Exception as err:
-        raise('Houve um erro.', err)
+        flash(f'Houve um erro. Erro: {err}', 'error')
+
+    return render_template('userCreate.html', form=form)
     
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -112,8 +114,8 @@ def upt(id):
         except:
             flash('Houve um erro ao editar usuário, tente novamente.', 'error')
             return redirect(url_for('contato'))
-    else:
-        return render_template('userUpdate.html', user=user)
+        
+    return render_template('userUpdate.html', user=user)
 
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -131,6 +133,8 @@ def delete(id):
         except:
             flash('Houve um erro ao deletar o usuário, tente novamente.')
             return redirect(url_for('contato'))
+        
+    return render_template('userDelete.html', user=user)
 
 @app.route('/dashboard', methods=['POST', 'GET'])
 @login_required

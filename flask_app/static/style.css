@@ -24,6 +24,12 @@ header {
     padding: 10px 200px;
 }
 
+.container__alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .logo {
     text-decoration: none;
     color: whitesmoke;
