@@ -153,3 +153,7 @@ def logout():
 def contato():
     users = User.query.all()
     return render_template('contatos.html', users=users)
+
+@app.errorhandler(403)
+def forbidden(e):
+    return render_template('403.html'), 403
