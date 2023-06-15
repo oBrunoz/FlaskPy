@@ -1,0 +1,16 @@
+    {% extends "base.html" %}
+    {% block title %}{{ super() }} - Deletar{% endblock %}
+    {% block content %}
+    <div class="container mt-3 mb-3">
+      <h2 class="text-center mb-4">Você tem certeza que deseja excluir o usuário "{{user.nome}}"?</h2>
+        <form method="post" action="/delete/{{user.id}}">
+            <div class="form-group text-center mb-4">
+              <button type="submit" class="btn btn-danger mt-4">Desejo excluir</button>
+            </div>
+        </form>
+        <div class="form-group text-center mb-4">
+            <a href="/dados"><button class="btn btn-success mt-4">Cancelar</button></a>
+        </div>
+    </div>
+
+    {% endblock %}

@@ -1,0 +1,17 @@
+<header>
+    <a href="/" class="logo"><b>Is</b>Bruno</a>
+    <nav class="header-navigation">
+        <a href="{{url_for('index')}}" style="color: #29d159; text-transform: capitalize;">Home</a>
+        {% if current_user.is_authenticated %}
+            {% if current_user.id == 1 %}
+                <a href="{{url_for('contato')}}">Contatos</a>
+                <a href="/admin">Administrador</a>
+            {% endif %}
+            <a href="{{url_for('loged')}}">Usuário</a>
+            <a href="{{url_for('logout')}}">Sair</a>
+        {% else %}
+            <a href="{{url_for('cadastro')}}">Cadastro</a>
+            <a href="{{url_for('login')}}">Login</a>
+        {% endif %}
+    </nav>
+</header>

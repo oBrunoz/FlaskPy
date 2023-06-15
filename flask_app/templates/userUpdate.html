@@ -1,0 +1,19 @@
+    {% extends "base.html" %}
+    {% block content %}
+
+    <div class="container mt-3 mb-3">
+        <form method="post" action="/update/{{user.id}}">
+            <h2 class="text-center mb-4">Edite seus dados</h2>
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" name="nome" placeholder="Digite o seu nome" value="{{user.nome}}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" placeholder="Digite o seu email" value="{{user.email}}" required>
+            </div>
+            <button class="btn btn-success" type="submit" value="Cadastrar">Editar</button>
+        </form>
+    </div>
+
+    {% endblock %}

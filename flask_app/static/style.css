@@ -1,0 +1,431 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap');
+
+body {
+    margin: 0;
+    overflow-y: hidden;
+    background: #220135;
+    color: whitesmoke;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 200px;
+}
+
+.container__alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    text-decoration: none;
+    color: whitesmoke;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.8em;
+    transition: .5s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo:hover {
+    text-decoration: none;
+    color: #29d159;
+    letter-spacing: .10em;
+    text-shadow: 0 0 3px #2C3333;
+}
+
+.logo > b {
+    color: #66347F;
+    font-style: italic;
+    position: relative;
+    right: 2px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.header-navigation a {
+    font-family: 'Poppins', sans-serif;
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 500;
+    padding-left: 30px;
+    transition: 1s;
+}
+
+.header-navigation a:hover {
+    color: #29d159;
+}
+
+.main {
+    width: 100%; /* ViewPort Width */
+    height: 100vh; /* ViewPort Height */
+    background: #220135;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-main {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /*Alinhar em coluna os elementos da div*/
+}
+
+.left-main > h1 {
+    position: relative;
+    display: block;
+    left: 8%;
+    top: -10%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2vw;
+    font-weight: 900;
+}
+
+.multiText {
+    color: #1dab45;
+    text-transform: capitalize;
+}
+
+.left-main > p {
+    display: block;
+    position: relative;
+    text-align: justify;
+    margin: 0;
+    width: 80%;
+    left: 7.7%;
+    top: -9%;
+    font-size: 1.2em;
+    color: whitesmoke;
+}
+
+.left-main > p > b {
+    color: #0664D4;
+}
+
+.left-main-image {
+    position: relative;
+    top: -5%;
+    width: 65%;
+}
+
+.right-main {
+    font-family: 'Roboto Mono';
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-login {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 35px;
+    background: #3a015c;
+    border-radius: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+}
+
+.form-login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-login > h1 {
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    font-weight: 600;
+    color: #1dab45;
+    font-weight: 800;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.card-login > p {
+    color: rgba(245, 245, 245, 0.822);
+    padding-top: 5%;
+}
+
+.card-login > p > a {
+    text-decoration: none;
+    color: #0664D4;
+    text-decoration: underline;
+}
+
+.textfield {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.textfield > input {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    color: #18122B;
+    background: #6e389b;
+    box-shadow: 0px 10px 40px #00000056;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.textfield > label {
+    margin-bottom: 10px;
+}
+
+.textfield > input::placeholder {
+    color: #f7fff7;
+}
+
+.textfield > input:focus::placeholder {
+    color: transparent;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 4% 0px;
+    margin: 5%;
+    position: relative;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #30024b;
+    background: #1dab45;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.btn-login:hover {
+    color: whitesmoke;
+    box-shadow: 0px 0.1px 10px #caf3c2;
+    
+}
+
+.btn-share {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    right: 15em;
+    bottom: 4%;
+    height: 4em;
+    width: 15em;
+    border: none;
+    border-radius: 40px;
+    background-color: whitesmoke;
+}
+
+.btn-share > span {
+    z-index: 1;
+    display: inline-block;
+    background-color: black;
+    height: 3em;
+    width: 11.5em;
+    border-radius: 25px;
+    line-height: 55px;
+    font-size: 18px;
+    letter-spacing: 3px;
+    transition: all 0.5s;
+}
+
+button .container {
+    z-index: -1;
+    width: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    transform: translateY(-50px);
+    transition: all 0.4s;
+  }
+  
+button .container svg {
+    padding: 0 10px;
+  }
+  
+button:hover span {
+    width: 0;
+  }
+  
+button:hover .container {
+    z-index: 2;
+    width: 100%;
+  }
+
+/* LOGIN.HTML */
+
+.main-login-page {
+    width: 100%; /* ViewPort Width */
+    height: 100vh; /* ViewPort Height */
+    background: #220135;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-login-page {
+    margin: 0;
+    height: 50%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 35px;
+    background: #3a015c;
+    border-radius: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+}
+
+.form-login-page {
+    width: 100%;
+}
+
+.form-login-page > h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #1dab45;
+    font-weight: 800;
+    margin: 0;
+}
+
+.form-label-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.form-label-page > input {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    color: #18122B;
+    background: #6e389b;
+    box-shadow: 0px 10px 40px #00000056;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-label-page > label {
+    margin-bottom: 10px;
+}
+
+.form-label-page > input:focus::placeholder {
+    color: transparent;
+}
+
+.alert-flash {
+    width: fit-content;
+    position: absolute;
+    top: 15%;
+}
+
+.alert-flash-success {
+    width: fit-content;
+    position: absolute;
+    top: 15%;
+    color: #1dab45;
+}
+
+.alert-flash-danger {
+    width: fit-content;
+    position: absolute;
+    top: 15%;
+}
+
+/* END LOGIN.HTML */
+
+/* CADASTRO.HTML */
+
+.main-cad-page {
+    width: 100%; /* ViewPort Width */
+    height: 100vh; /* ViewPort Height */
+    background: #220135;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-group {
+    color: black;
+}
+
+.form-group > label {
+    color: whitesmoke;
+}
+
+/* END CADASTRO.HTML */
+
+/* CONTATO.HTML */
+
+.main-contatos-page {
+    width: 100%; /* ViewPort Width */
+    height: 100vh; /* ViewPort Height */
+    background: #220135;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* END CONTATO.HTML */
+
+@media only screen and (max-width: 950px) {
+    .card-login {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .main {
+        flex-direction: column;
+    }
+    .left-main > h1 {
+        display: none;
+    }
+    .left-main {
+        width: 100%;
+        height: auto;
+    }
+    .right-main {
+        width: 100%;
+        height: auto;
+    }
+    .left-main-image {
+        width: 70vw;
+    }
+    .card-login {
+        width: 80%;
+    }
+}

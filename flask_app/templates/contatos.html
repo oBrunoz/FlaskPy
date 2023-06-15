@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ super() }} - Contatos{% endblock %}
+{% block content %}
+
+<div class="main-contatos-page">
+    <h2>Contatos</h2>
+    <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in users %}
+            <tr>
+              <th scope="row">{{i.id}}</th>
+                <td>{{i.nome}}</td>
+                <td>{{i.email}}</td>
+                <td><a href="{{ url_for('upt', id=i.id) }}"><button class="btn btn-success mt-4">Editar</button></a></td>
+                <td><a href="{{ url_for('delete', id=i.id) }}"><button class="btn btn-danger mt-4">Excluir</button></a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+
+{% endblock %}
