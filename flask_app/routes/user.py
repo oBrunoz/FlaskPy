@@ -156,4 +156,8 @@ def contato():
 
 @app.errorhandler(403)
 def forbidden(e):
-    return render_template('403.html'), 403
+    return render_template('403.html', e=e), 403
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template('404.html', e=e), 404

@@ -15,31 +15,7 @@
 </head>
 <body>
     {% include 'navbar.html' %}
-    {% if get_flashed_messages() %}
-        <div class="container__alert mt-4">
-            {% with msg = get_flashed_messages(category_filter=["success"]) %}
-            {% if msg %}
-            {% for msg in msg %}
-            <div class="alert-flash alert alert-success alert-dismissible" role="alert">
-                {{msg}}
-                <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
-        
-            {% with msg = get_flashed_messages(category_filter=["error"]) %}
-            {% if msg %}
-            {% for msg in msg%}
-            <div class="alert-flash alert alert-danger alert-dismissible" role="alert">
-                {{msg}}
-                <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
-        </div>
-    {% endif %}
+    {% include '__msg.html' %}
     {% block content %}
     <div class="main">
         <div class="left-main">
@@ -55,27 +31,6 @@
             </button>
         </div>
         <div class="right-main">
-            {% with msg = get_flashed_messages(category_filter=["success"]) %}
-            {% if msg %}
-            {% for msg in msg %}
-            <div class="alert-flash alert alert-success alert-dismissible" role="alert">
-                {{msg}}
-                <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
-        
-            {% with msg = get_flashed_messages(category_filter=["error"]) %}
-            {% if msg %}
-            {% for msg in msg%}
-            <div class="alert-flash alert alert-danger alert-dismissible" role="alert">
-                {{msg}}
-                <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
             {% if current_user.is_authenticated %}
                 <div class="card-login">
                     <h1>Dados do Usuário</h1>

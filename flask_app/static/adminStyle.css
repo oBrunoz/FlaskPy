@@ -21,9 +21,8 @@ body {
     padding: 5rem 4rem 0 4rem;
 	width: 100%;
 	max-width: 525px;
-	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/283591/login-background.jpg);
 	box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.85);
-    max-height: 650px;
+    max-height: 645px;
 }
 
 .login-container:after {
@@ -63,7 +62,7 @@ body {
 	margin-left: 2.25rem;
 }
 
-.login-nav__item a {
+.login-nav__item p {
 	position: relative;
 	color: rgba(255, 255, 255, 0.5);
 	text-decoration: none;
@@ -74,13 +73,13 @@ body {
 	transition: .20s all ease;
 }
 
-.login-nav__item.active a,
-.login-nav__item a:hover{
+.login-nav__item.active p,
+.login-nav__item p:hover{
 	color: #ffffff;
 	transition: .15s all ease;
 }
 
-.login-nav__item a:after {
+.login-nav__item p:after {
 	content: '';
   display: inline-block;
   height: 10px;
@@ -93,8 +92,8 @@ body {
   transition: .15s all ease;
 }
 
-.login-nav__item a:hover:after,
-.login-nav__item.active a:after{
+.login-nav__item p:hover:after,
+.login-nav__item.active p:after{
 	background-color: rgb(17, 97, 237);
 	height: 2px;
 	right: 0;
@@ -171,9 +170,10 @@ body {
 }
 
 .alert-flash > button.close {
+    font-size: 1.1rem;
     width: fit-content;
     background: none;
-    color: whitesmoke;
+    color: black;
 }
 
 .alert-success {
