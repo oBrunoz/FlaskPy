@@ -1,6 +1,5 @@
 from flask import Flask, redirect, request, url_for, session, abort, render_template
 from flask_app.routes.admin.adm import admin_blueprints
-# from app.routes.admin import SecureModelView
 from flask_app.db.db import database as db
 from flask_admin.contrib.sqla import ModelView
 from flask_bootstrap import Bootstrap
@@ -39,8 +38,8 @@ class SecureModelView(ModelView):
             return render_template('403.html'), 403
             # Arrumar abort page
 
-from app.models.Admin import Administrator
-from app.models.User import User
+from flask_app.models.Admin import Administrator
+from flask_app.models.User import User
 
 adminPage.add_view(SecureModelView(Administrator, db.session))
 adminPage.add_view(SecureModelView(User, db.session))

@@ -1,4 +1,4 @@
-from app.models import db, UserMixin
+from flask_app.db.db import database as db
 
 class Administrator(db.Model, UserMixin):
     __tablename__ = 'admin'
