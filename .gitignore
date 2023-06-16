@@ -1,6 +1,5 @@
 venv
 instance
 db
-admin
 config.py
 admn.py
