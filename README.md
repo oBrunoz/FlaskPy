@@ -1,7 +1,7 @@
 
 # ✨ Flask CRUD
 
-Este é um projeto Flask em Python que implementa um CRUD (Create, Read, Update, Delete) básico utilizando banco de dados SQLite. O objetivo do projeto é demonstrar uma estrutura inicial de implementação das quatro operações básicas do desenvolvimento de uma aplicação.
+Este é um projeto Flask em Python que implementa um CRUD (Create, Read, Update, Delete) básico utilizando banco de dados SQLite. O objetivo do projeto é demonstrar uma estrutura inicial de implementação das quatro operações básicas do desenvolvimento de uma aplicação web.
 
 
 
