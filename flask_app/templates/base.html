@@ -15,7 +15,31 @@
 </head>
 <body>
     {% include 'navbar.html' %}
-    {% include '__msg.html' %}
+    {% if get_flashed_messages() %}
+        <div class="container__alert mt-4">
+        {% with msg = get_flashed_messages(category_filter=["success"]) %}
+        {% if msg %}
+        {% for msg in msg %}
+        <div class="alert-flash alert alert-success alert-dismissible" role="alert">
+            {{msg}}
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% with msg = get_flashed_messages(category_filter=["error"]) %}
+        {% if msg %}
+        {% for msg in msg%}
+        <div class="alert-flash alert alert-danger alert-dismissible" role="alert">
+            {{msg}}
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        </div>
+    {% endif %}
     {% block content %}
     <div class="main">
         <div class="left-main">
@@ -45,22 +69,7 @@
                     </div>
                 </div>
             {%else%}
-            <div class="card-login">
-                    <form class="form-login" action="" method="post">
-                        {{form.csrf_token}}
-                        <h1>Login</h1>
-                        <div class="textfield">
-                            <label for="usuario">Usuário</label>
-                            {{form.name(class_="form-input", placeholder="Digite seu usuário")}}
-                        </div>
-                        <div class="textfield">
-                            <label for="senha">Senha</label>
-                            {{form.senha(class_="form-input", placeholder="Digite sua senha")}}
-                        </div>
-                        <button type="submit" class="btn-login">Entrar</button>
-                    </form>
-                    <p>Não possui um cadastro? <a href="{{url_for('cadastro')}}">Cadastre-se</a>.</p>
-                </div>
+            {% include 'partials/base_login.html' %}
             {% endif %}
         </div>
     </div>

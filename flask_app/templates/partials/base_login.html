@@ -1,0 +1,16 @@
+<div class="card-login">
+    <form class="form-login" action="" method="post">
+        {{form.csrf_token}}
+        <h1>Login</h1>
+        <div class="form-label-page ">
+            <label for="usuario">Usuário</label>
+            {{form.name(class_="form-input", placeholder="Digite seu usuário")}}
+        </div>
+        <div class="form-label-page ">
+            <label for="senha">Senha</label>
+            {{form.senha(class_="form-input", placeholder="Digite sua senha")}}
+        </div>
+        <button type="submit" class="btn btn-login">Entrar</button>
+    </form>
+    <p>Não possui um cadastro? <a href="{{url_for('cadastro')}}">Cadastre-se</a>.</p>
+</div>
