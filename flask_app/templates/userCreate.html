@@ -2,32 +2,31 @@
 {% block title %}{{ super() }} - Cadastro{% endblock %}
     {% block content %}
 
-
     <div class="main-cad-page">
-        <div class="container mt-3 mb-3">
+        <div class="container-cad-page container mt-3 mb-3">
             <form action="" method="post">
                 {{ form.csrf_token }}
-                <h2 class="text-center mb-4">Crie sua conta</h2>
-                <div class="form-group">
+                <h1 class="text-center mb-4">Crie sua conta</h1>
+                <div class="form-label-page form-group">
                     <label for="nome">Nome:</label>
                     {{form.name(class_="form-control", placeholder="Digite o seu nome")}}
                 </div>
-                <div class="form-group">
+                <div class="form-label-page form-group">
                     <label for="email">Email:</label>
                     {{form.email(class_="form-control", placeholder="Digite o seu email")}}
                 </div>
-                <div class="form-group">
+                <div class="form-label-page form-group">
                     <label for="senha">Senha:</label>
                     {{form.senha(class_="form-control", placeholder="Digite a sua senha")}}
                     <small id="passwordHelpInline" class="text-muted">
                         Mínimo de 8 caracteres.
                     </small>
                 </div>
-                <div class="form-group">
+                <div class="form-label-page form-group">
                     <label for="senha2">Repita a sua senha:</label>
                     {{form.confirmSenha(class_="form-control", placeholder="Repita sua senha")}}
                 </div>
-                <button class="btn btn-success" type="submit" value="Cadastrar">Cadastrar</button>
+                <button class="btn btn__login" type="submit" value="Cadastrar">Cadastrar</button>
             </form>
         </div>
     </div>

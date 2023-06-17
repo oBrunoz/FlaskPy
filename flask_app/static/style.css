@@ -163,9 +163,15 @@ header {
     text-transform: uppercase;
 }
 
+.card-login {
+    height: fit-content;
+    width: 60%;
+}
+
 .card-login > p {
     color: rgba(245, 245, 245, 0.822);
-    padding-top: 5%;
+    margin-top: 5%;
+    position: relative;
 }
 
 .card-login > p > a {
@@ -174,60 +180,25 @@ header {
     text-decoration: underline;
 }
 
-.textfield {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin: 10px 0px;
-}
-
-.textfield > input {
-    width: 100%;
-    border: none;
-    border-radius: 12px;
-    padding: 15px;
-    color: #18122B;
-    background: #6e389b;
-    box-shadow: 0px 10px 40px #00000056;
-    outline: none;
-    box-sizing: border-box;
-}
-
-.textfield > label {
-    margin-bottom: 10px;
-}
-
-.textfield > input::placeholder {
-    color: #f7fff7;
-}
-
-.textfield > input:focus::placeholder {
-    color: transparent;
-}
-
 .btn-login {
-    width: 100%;
-    padding: 4% 0px;
-    margin: 5%;
-    position: relative;
-    border: none;
-    border-radius: 8px;
-    outline: none;
+    font-family: "Poppins", sans-serif;
     text-transform: uppercase;
-    font-weight: 800;
-    letter-spacing: 3px;
-    color: #30024b;
+    outline: 0;
     background: #1dab45;
+    width: 100%;
+    border: 50%;
+    margin-top: 5%;
+    padding: 10px;
+    font-weight: 600;
+    color: whitesmoke;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
     cursor: pointer;
-    transition: 1s;
 }
 
-.btn-login:hover {
-    color: whitesmoke;
-    box-shadow: 0px 0.1px 10px #caf3c2;
-    
+.btn-login button:hover,.btn-login button:active,.btn-login button:focus {
+    background: #0c5521;
 }
 
 .btn-share {
@@ -290,10 +261,17 @@ button:hover .container {
     align-items: center;
 }
 
+.form-login-page {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: contents;
+}
+
 .container-login-page {
     margin: 0;
-    height: 50%;
-    width: 30%;
+    height: fit-content;
+    width: 35vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -314,6 +292,7 @@ button:hover .container {
     color: #1dab45;
     font-weight: 800;
     margin: 0;
+    text-transform: uppercase;
 }
 
 .form-label-page {
@@ -330,7 +309,7 @@ button:hover .container {
     border: none;
     border-radius: 12px;
     padding: 15px;
-    color: #18122B;
+    color: black;
     background: #6e389b;
     box-shadow: 0px 10px 40px #00000056;
     outline: none;
@@ -343,6 +322,27 @@ button:hover .container {
 
 .form-label-page > input:focus::placeholder {
     color: transparent;
+}
+
+.btn__login {
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #1dab45;
+    width: 100%;
+    border: 50%;
+    margin-top: 5%;
+    padding: 15px;
+    font-weight: 600;
+    color: whitesmoke;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+
+.fobtn__login button:hover,.btn__login button:active,.btn__login button:focus {
+    background: #0c5521;
 }
 
 .alert-flash {
@@ -368,6 +368,17 @@ button:hover .container {
 
 /* CADASTRO.HTML */
 
+.text-center{
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    padding: 10px;
+    font-weight: 600;
+    color: #1dab45;
+    font-weight: 600;
+    margin: 0;
+    text-transform: uppercase;
+}
+
 .main-cad-page {
     width: 100%; /* ViewPort Width */
     height: 100vh; /* ViewPort Height */
@@ -375,6 +386,60 @@ button:hover .container {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.form-cad-page {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: contents;
+}
+
+.container-cad-page {
+    margin: 0;
+    height: fit-content;
+    width: 50vw;
+    flex-direction: column;
+    padding: 30px 35px;
+    background: #3a015c;
+    border-radius: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+}
+
+.form-label-page { 
+    font-family: 'Roboto Mono';
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 10px 0px;
+    font-weight: 200;
+}
+
+.form-label-page > input {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    color: black;
+    background: #6e389b;
+    box-shadow: 0px 10px 40px #00000056;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-label-page > label {
+    margin-bottom: 10px;
+}
+
+.form-label-page > input:focus::placeholder {
+    color: transparent;
+}
+
+.text-muted {
+    margin-top: 7px;
+    color: rgba(255, 255, 255, 0.651);
 }
 
 .form-group {
